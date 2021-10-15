@@ -71,7 +71,7 @@ export class GenericSdkVisitor extends ClientSideBaseVisitor<RawGenericSdkPlugin
         const returnType = usingObservable && o.operationType === 'Subscription' ? 'Observable' : 'Promise';
         return `${o.node.name.value}(variables${optionalVariables ? '?' : ''}: ${
           o.operationVariablesTypes
-        }, options?: C): ${returnType}<${o.operationResultType}> {
+        }, options?: C): ${returnType}<{ data: ${o.operationResultType}, errors: any }> {
   return requester<${o.operationResultType}, ${o.operationVariablesTypes}>(${
           o.documentVariableName
         }, variables, options);
